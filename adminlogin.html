@@ -5,35 +5,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- CSS FILES -->
+    <script type="module" src="js/admin.js" defer></script>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap-icons.css" rel="stylesheet">
     <link href="css/binbuddy.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <title>Bin Buddy - Admin Panel</title>
+    <title>Bin Buddy - Admin Login</title>
     <style>
-        .worker-profile {
+        /* Background styling */
+        body {
+            background: url('images/login.webp') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+        }
+
+        .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-container h2 {
+            font-size: 24px;
             margin-bottom: 20px;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
             text-align: center;
-            background-color: #f9f9f9;
-        }
-
-        .worker-profile img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 10px;
-        }
-
-        .worker-name {
-            font-size: 16px;
             font-weight: bold;
-            margin-top: 5px;
+            color: #333;
+        }
+
+        .login-container .form-control {
+            border-radius: 5px;
+        }
+
+        .login-container .btn {
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .login-container .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .login-container .text-blue {
+            color: #007bff;
+        }
+
+        .login-container .text-blue:hover {
+            color: #0056b3;
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -104,126 +126,57 @@
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="index.html#section_1">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="index.html#section_2">About</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="index.html#section_3">Works</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="index.html#section_4">Volunteer</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link click-scroll" href="index.html#section_5">News</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="index.html#section_6">Contact</a>
+                    </li>
+
                     <li class="nav-item ms-3">
-                        <a class="nav-link custom-btn custom-border-btn btn" href="https://docs.google.com/spreadsheets/d/1fUM3j0XUs9EinBvYvyCHAxwjl_NJZ1fG0QIqcGM98uk/edit?usp=sharing"><b>Volunteer's Application </b></a>
+                        <a class="nav-link custom-btn custom-border-btn btn" href="donate.html">Donate</a>
                     </li>
                     <li class="nav-item ms-3">
-                        <a class="nav-link custom-btn custom-border-btn btn" href="https://docs.google.com/spreadsheets/d/1RxtOwwD5Y4pi5y1LuDMiTXyB4b-z4iu5Nq0v-0t6Qck/edit?usp=sharing"><b>Dustbin's Status</b></a>
+                        <a class="nav-link custom-btn custom-border-btn btn" href="loginpage.html">SIGN IN</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div class="container my-5">
-        <h2 class="text-center">Worker Profiles</h2>
-        <div id="workers" class="row">
-            <!-- Worker profiles will be dynamically loaded here -->
-        </div>
-    </div>
-
-    <!-- Modal for Assigning Task -->
-    <div class="modal fade" id="assignTaskModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Assign Task</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Select a dustbin to assign to the worker:</p>
-                    <ul id="dustbins" class="list-group">
-                        <!-- Dustbin list will be dynamically loaded -->
-                    </ul>
-                </div>
+    <!-- Login Form -->
+    <div class="login-container">
+        <h2>Admin Login</h2>
+        <form>
+            <div class="mb-3">
+                <label for="email" class="form-label">Unique Address</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter Your ID" required>
             </div>
-        </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required>
+            </div>
+            <button type="button" class="btn btn-primary w-100" id="loginButton">Login</button>
+        </form>
+        
     </div>
-
-    <script>
-        // Data for workers
-        const workers = [
-            { id: 1, name: "Ramesh", phone: "+91XXXXX-XXXXX", img: "./images/icons/worker.webp" },
-            { id: 2, name: "Suresh", phone: "+91XXXXX-XXXXX", img: "./images/icons/profile.jpg" },
-            { id: 3, name: "Rajesh", phone: "+91XXXXX-XXXXX", img: "./images/icons/worker.webp" },
-            { id: 4, name: "Mukesh", phone: "+91XXXXX-XXXXX", img: "./images/icons/profile.jpg" },
-            { id: 5, name: "Rakesh", phone: "+91XXXXX-XXXXX", img: "./images/icons/worker.webp" },
-            { id: 6, name: "Mahesh", phone: "+91XXXXX-XXXXX", img: "./images/icons/profile.jpg" }
-        ];
-
-        // Data for dustbins
-        const dustbins = [
-            { id: 1, name: "Dustbin 1", location: "https://maps.app.goo.gl/a8Fa5s39dH8bdfo17?g_st=aw" },
-            { id: 2, name: "Dustbin 2", location: "https://maps.app.goo.gl/JXaEhN81whmjH9Zw6?g_st=aw" },
-            { id: 3, name: "Dustbin 3", location: "https://maps.app.goo.gl/jK5wdboNL2g2fyq8A?g_st=aw" },
-            { id: 4, name: "Dustbin 4", location: "https://maps.app.goo.gl/RzMPfSyeUFDMYjYu7?g_st=aw" },
-            { id: 5, name: "Dustbin 5", location: "https://maps.app.goo.gl/zpcrhWV2kNRnT2Z88?g_st=aw" },
-            { id: 6, name: "Dustbin 6", location: "https://maps.app.goo.gl/ougtYFDAHBHF6gNK7?g_st=aw" }
-        ];
-
-        // Load worker profiles dynamically
-        $(document).ready(() => {
-            const workersContainer = $("#workers");
-
-            workers.forEach(worker => {
-                workersContainer.append(`
-                    <div class="col-md-4">
-                        <div class="worker-profile">
-                            <!-- Dynamically set profile image -->
-                            <img 
-                                src="${worker.img}" 
-                                alt="${worker.name}" 
-                                onerror="this.src='https://via.placeholder.com/80'" 
-                            />
-                            <!-- Worker Name -->
-                            <div class="worker-name">${worker.name}</div>
-                            <!-- Assign Task Button -->
-                            <button 
-                                class="btn btn-primary assign-task-btn mt-2" 
-                                data-worker-id="${worker.id}" 
-                                data-worker-phone="${worker.phone}">
-                                Assign Task
-                            </button>
-                        </div>
-                    </div>
-                `);
-            });
-
-            // Open the modal on button click
-            $(".assign-task-btn").click(function () {
-                const workerPhone = $(this).data("worker-phone");
-                $("#dustbins").empty();
-
-                dustbins.forEach(dustbin => {
-                    $("#dustbins").append(`
-                        <li class="list-group-item">
-                            ${dustbin.name} - 
-                            <a href="${dustbin.location}" target="_blank">View Location</a>
-                            <button 
-                                class="btn btn-sm btn-success float-end assign-dustbin-btn" 
-                                data-worker-phone="${workerPhone}" 
-                                data-dustbin-name="${dustbin.name}" 
-                                data-dustbin-location="${dustbin.location}">
-                                Assign
-                            </button>
-                        </li>
-                    `);
-                });
-
-                $("#assignTaskModal").modal("show");
-            });
-
-            // Redirect to WhatsApp on dustbin assignment
-            $(document).on("click", ".assign-dustbin-btn", function () {
-                const workerPhone = $(this).data("worker-phone");
-                const dustbinName = $(this).data("dustbin-name");
-                const dustbinLocation = $(this).data("dustbin-location");
-                const message = `Task Assigned: Please check ${dustbinName} at ${dustbinLocation}`;
-                const whatsappUrl = `https://wa.me/${workerPhone}?text=${encodeURIComponent(message)}`;
-                window.open(whatsappUrl, "_blank");
-            });
-        });
-    </script>
 
     <!-- Footer -->
     <footer class="site-footer">
@@ -327,6 +280,7 @@
     <script src="js/jquery.sticky.js"></script>
     <script src="js/counter.js"></script>
     <script src="js/custom.js"></script>
+
 </body>
 
 </html>

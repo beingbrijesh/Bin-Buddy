@@ -27,7 +27,7 @@ loginButton.addEventListener('click', (event) => {
         .then((userCredential) => {
             const user = userCredential.user;
             console.log("Login successful. Redirecting to Admin Panel...");
-            window.location.href = "https://docs.google.com/spreadsheets/d/1RxtOwwD5Y4pi5y1LuDMiTXyB4b-z4iu5Nq0v-0t6Qck/edit?usp=sharing";
+            window.location.href = "adminpanel.html";
         })
         .catch((error) => {
             // Handle errors
