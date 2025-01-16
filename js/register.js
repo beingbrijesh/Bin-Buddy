@@ -2,13 +2,13 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebas
 import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyB4ATeApLEEAWRn13Ts5A30wBe6XgTkMUQ",
-    authDomain: "bin-buddy-e0c27.firebaseapp.com",
-    projectId: "bin-buddy-e0c27",
-    storageBucket: "bin-buddy-e0c27.firebasestorage.app",
-    messagingSenderId: "1083287122611",
-    appId: "1:1083287122611:web:c9e0691b3f9c14ae87f6c6",
-    measurementId: "G-CVC1PTT0NC"
+    apiKey: "Your API KEY",
+    authDomain: "Your AUTH DOMAIN",
+    projectId: "Your Project Id",
+    storageBucket: "XXXXXXXXX",
+    messagingSenderId: "XXXXXXXXX",
+    appId: "XXXXXXXXXXX",
+    measurementId: "XXXXXXXXX"
 };
 
 // Initialize Firebase
