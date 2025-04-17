@@ -190,48 +190,53 @@
         }
 
         // Capture dustbin data and store it
-        async function captureDustbin() {
-            try {
-                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-                const video = document.createElement("video");
-                video.srcObject = stream;
-                await video.play();
-                await new Promise(r => setTimeout(r, 1500));
+        // Capture dustbin data and store it
+async function captureDustbin() {
+    try {
+        // 🛠️ UPDATED HERE: Force use of back camera (environment camera)
+        const stream = await navigator.mediaDevices.getUserMedia({
+            video: { facingMode: { exact: "environment" } }
+        });
 
-                const canvas = document.createElement("canvas");
-                canvas.width = 320;
-                canvas.height = 240;
-                canvas.getContext("2d").drawImage(video, 0, 0, canvas.width, canvas.height);
-                const imageDataUrl = canvas.toDataURL("image/png");
+        const video = document.createElement("video");
+        video.srcObject = stream;
+        await video.play();
+        await new Promise(r => setTimeout(r, 1500));
 
-                stream.getTracks().forEach(t => t.stop());
+        const canvas = document.createElement("canvas");
+        canvas.width = 320;
+        canvas.height = 240;
+        canvas.getContext("2d").drawImage(video, 0, 0, canvas.width, canvas.height);
+        const imageDataUrl = canvas.toDataURL("image/png");
 
-                navigator.geolocation.getCurrentPosition(pos => {
-                    const lat = pos.coords.latitude;
-                    const lng = pos.coords.longitude;
-                    const link = `https://maps.google.com/?q=${lat},${lng}`;
-                    const id = dustbins.length + 1;
+        stream.getTracks().forEach(t => t.stop());
 
-                    dustbins.push({
-                        id: id,
-                        location: link,
-                        image: imageDataUrl,
-                    });
+        navigator.geolocation.getCurrentPosition(pos => {
+            const lat = pos.coords.latitude;
+            const lng = pos.coords.longitude;
+            const link = `https://maps.google.com/?q=${lat},${lng}`;
+            const id = dustbins.length + 1;
 
-                    localStorage.setItem("dustbins", JSON.stringify(dustbins));
+            dustbins.push({
+                id: id,
+                location: link,
+                image: imageDataUrl,
+            });
 
-                    // Dynamically update dustbin list without refreshing the page
-                    loadDustbins();
+            localStorage.setItem("dustbins", JSON.stringify(dustbins));
 
-                    // Close modal after registration
-                    $('#registerModal').modal('hide');
+            // Dynamically update dustbin list without refreshing the page
+            loadDustbins();
 
-                    alert("Dustbin Registered Successfully!");
-                }, () => alert("Location access denied."));
-            } catch (e) {
-                alert("Camera access failed.");
-            }
-        }
+            // Close modal after registration
+            $('#registerModal').modal('hide');
+
+            alert("Dustbin Registered Successfully!");
+        }, () => alert("Location access denied."));
+    } catch (e) {
+        alert("Camera access failed.");
+    }
+}
 
         // View the QR Code
         function viewQR(index) {
