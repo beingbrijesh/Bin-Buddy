@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <title>Bin Buddy - Admin Panel</title>
+    <title>Bin Buddy - Worker's Profile</title>
     <style>
         .worker-profile {
             margin-bottom: 20px;
@@ -89,71 +89,126 @@
                     <small>Building a Green Future</small>
                 </span>
             </a>
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
         </div>
     </nav>
 
+    <!-- Main Section -->
+    <div class="container my-5">
+        <h2 class="text-center">Worker's Profile</h2>
+        <div id="workers" class="row">
+            <!-- Worker profiles will be dynamically loaded here -->
+        </div>
+    </div>
 
-    <section class="section-padding">
-        <div class="container">
-            <div class="row">
-
-                <div class="col-lg-10 col-12 text-center mx-auto">
-                    <h2 class="mb-5">Welcome Admin</h2>
+    <!--  Modal for Assigning Task -->
+    <div class="modal fade" id="assignTaskModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Assign Task</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                
-                <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0 mb-md-4">
-                    <div class="featured-block d-flex justify-content-center align-items-center">
-                        <a href="Worker's Profile.html" class="d-block">
-                        <img src="images/icons/Worker's Profile.jpeg" class="featured-block-image img-fluid" alt="">
-
-                            <p class="featured-block-text"><strong>Worker's Profile</strong></p>
-                        </a>
-                    </div>
+                <div class="modal-body">
+                    <p>Select a dustbin to assign to the worker:</p>
+                    <ul id="dustbins" class="list-group">
+                        <!-- Dustbin list will be dynamically loaded -->
+                    </ul>
                 </div>
-
-                <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0 mb-md-4">
-                    <div class="featured-block d-flex flex-column justify-content-center align-items-center text-center p-3">
-                        <a href="#" class="d-block">
-                            <div style="width: 150px; height: 150px; overflow: hidden; border-radius: 50%; background: #f8f9fa; display: flex; justify-content: center; align-items: center;">
-                                <img src="images/icons/Bin icon.png" alt="Worker's Profile Icon" style="width: 100%; height: auto;">
-                            </div>
-                            <p class="featured-block-text mt-2"><strong>Dustbin's Info.</strong></p>
-                        </a>
-                    </div>
-                </div>
-                
-
-                <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
-                    <div class="featured-block d-flex justify-content-center align-items-center">
-                        <a href="https://forms.gle/VrsHJaAaGqMAeNFV9" class="d-block">
-                            <img src="images/icons/hands.webp" class="featured-block-image img-fluid" alt="">
-
-                            <p class="featured-block-text"> <strong>Volunteer's Application</strong></p>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
-                    <div class="featured-block d-flex justify-content-center align-items-center">
-                        <a href="Dustbin's Info.html" class="d-block">
-                            <img src="images/icons/Add.png" class="featured-block-image img-fluid" alt="">
-
-                            <p class="featured-block-text"><strong>Add New Dustbin</strong></p>
-                        </a>
-                    </div>
-                </div>
-
             </div>
         </div>
-    </section>
+    </div>
 
+    <script>
+        const dustbins = JSON.parse(localStorage.getItem("dustbins")) || [
+            { id: 1, name: "Dustbin 1", location: "https://maps.app.goo.gl/a8Fa5s39dH8bdfo17?g_st=aw" },
+            { id: 2, name: "Dustbin 2", location: "https://maps.app.goo.gl/JXaEhN81whmjH9Zw6?g_st=aw" },
+            { id: 3, name: "Dustbin 3", location: "https://maps.app.goo.gl/jK5wdboNL2g2fyq8A?g_st=aw" },
+            { id: 4, name: "Dustbin 4", location: "https://maps.app.goo.gl/RzMPfSyeUFDMYjYu7?g_st=aw" },
+            { id: 5, name: "Dustbin 5", location: "https://maps.app.goo.gl/zpcrhWV2kNRnT2Z88?g_st=aw" },
+            { id: 6, name: "Dustbin 6", location: "https://maps.app.goo.gl/ougtYFDAHBHF6gNK7?g_st=aw" }
+        ];
+        
+        const workers = [
+            { id: 1, name: "A", phone: "+91XXXXXXXXXX", img: "./images/icons/worker.webp" },
+            { id: 2, name: "B", phone: "+91XXXXXXXXXX", img: "./images/icons/profile.jpg" },
+            { id: 3, name: "C", phone: "+91XXXXXXXXXX", img: "./images/icons/worker.webp" },
+            { id: 4, name: "D", phone: "+91XXXXXXXXXX", img: "./images/icons/profile.jpg" },
+            { id: 5, name: "E", phone: "+91XXXXXXXXXX", img: "./images/icons/worker.webp" },
+            { id: 6, name: "F", phone: "+91XXXXXXXXXX", img: "./images/icons/profile.jpg" }
+        ];
     
-
+        // Load workers on page ready
+        $(document).ready(() => {
+            loadWorkers();
+            renderDustbins();
+    
+            // Assign Task button setup
+            $(document).on("click", ".assign-task-btn", function () {
+                const workerPhone = $(this).data("worker-phone");
+                $("#dustbins").empty();
+                dustbins.forEach(d => {
+                    $("#dustbins").append(`
+                        <li class="list-group-item">
+                            ${d.name} - <a href="${d.location}" target="_blank">View Location</a>
+                            <img src="${d.image || ''}" class="ms-2" width="50"/>
+                            <button class="btn btn-sm btn-success float-end assign-dustbin-btn"
+                                data-worker-phone="${workerPhone}"
+                                data-dustbin-name="${d.name}"
+                                data-dustbin-location="${d.location}">Assign</button>
+                        </li>
+                    `);
+                });
+                $("#assignTaskModal").modal("show");
+            });
+    
+            // Assign via WhatsApp
+            $(document).on("click", ".assign-dustbin-btn", function () {
+                const phone = $(this).data("worker-phone");
+                const name = $(this).data("dustbin-name");
+                const location = $(this).data("dustbin-location");
+                const message = `Task Assigned: Please check ${name} at ${location}`;
+                window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, "_blank");
+            });
+    
+            // Save new dustbin
+            $("#saveDustbinBtn").click(() => {
+                captureDustbin();
+            });
+        });
+        function loadWorkers() {
+            const workersContainer = $("#workers");
+            workers.forEach(w => {
+                workersContainer.append(`
+                    <div class="col-md-4">
+                        <div class="worker-profile">
+                            <img src="${w.img}" alt="${w.name}" onerror="this.src='https://via.placeholder.com/80'" />
+                            <div class="worker-name">${w.name}</div>
+                            <button class="btn btn-primary assign-task-btn mt-2" data-worker-id="${w.id}" data-worker-phone="${w.phone}">Assign Task</button>
+                        </div>
+                    </div>
+                `);
+            });
+        }
+        function renderDustbins() {
+            const container = $("#dustbins");
+            container.empty();
+            dustbins.forEach((d, i) => {
+                container.append(`
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            ${d.name} - <a href="${d.location}" target="_blank">Location</a>
+                            <img src="${d.image || ''}" width="50" />
+                        </div>
+                        <div>
+                            <button class="btn btn-warning btn-sm me-1" onclick="editDustbin(${i})">Edit</button>
+                            <button class="btn btn-danger btn-sm" onclick="deleteDustbin(${i})">Delete</button>
+                        </div>
+                    </li>
+                `);
+            });
+            localStorage.setItem("dustbins", JSON.stringify(dustbins));
+        }
+    </script>
 
     <!-- Footer -->
     <footer class="site-footer">
@@ -210,22 +265,5 @@
     <script src="js/counter.js"></script>
     <script src="js/custom.js"></script>
 
-    <!-- 🚀 Fancy Bootstrap Modal for Registering Dustbin -->
-<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content p-3">
-        <div class="modal-header">
-          <h5 class="modal-title" id="registerModalLabel">Register New Dustbin</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body text-center">
-          <p class="mb-2">We will use your camera and location to register this dustbin.</p>
-          <button class="btn btn-success" id="saveDustbinBtn">Capture & Register</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  
 </body>
-
 </html>
