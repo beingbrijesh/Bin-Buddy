@@ -46,11 +46,16 @@ The QR-Based Smart Bin System is a smart waste management solution designed to e
 
 <h3>⚡ Drawbacks and Mitigation</h3>
 
-Drawback                                	Solution
-User-dependent reporting	    Incentivize users and combine with sensor data
-False reporting	                Use verification steps like photo uploads and admin approval
-QR code damage              	Use durable, weatherproof QR stickers
-Internet issues             	Create a lightweight, offline-capable reporting page
+<h4>Drawback</h4>            
+<li>User-dependent reporting</li>
+<li>False reporting</li>
+<li>QR code damage</li>
+<li>Internet issues</li>
+<h4>Solution</h4>
+<li>Incentivize users and combine with sensor data</li>
+<li>Use verification steps like photo uploads and admin approval</li>
+<li>Use durable, weatherproof QR stickers</li>
+<li>Create a lightweight, offline-capable reporting page</li>
 
 
 <h3>🙌 Contributors</h3>
