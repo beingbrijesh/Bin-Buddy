@@ -20,8 +20,8 @@ The QR-Based Smart Bin System is a smart waste management solution designed to e
 
 
 <h3>🛠️ Installation and Setup</h3>
-<li>Clone the repository: git clone https://github.com/your-username/qr-smart-bin.git</li>
-<li>Navigate to the project directory: cd qr-smart-bin</li>
+<li>Clone the repository: git clone https://github.com/your-username/Bin-Buddy.git</li>
+<li>Navigate to the project directory: cd Bin-Buddy</li>
 <li>Install dependencies (for Node.js backend): npm install</li>
 <li>Configure the database connection in the /config folder.</li>
 <li>Run the application: npm start</li>
