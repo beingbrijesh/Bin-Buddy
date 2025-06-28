@@ -1,0 +1,234 @@
+/* Contact.css */
+
+.contact-section {
+  padding: 5rem 1rem;
+  background-color: #f9fafb;
+}
+
+.contact-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.contact-intro-card {
+  background-color: #1f2937; /* footer slate */
+  padding: 2.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.contact-intro-card h2,
+.contact-intro-card p {
+  color: #f8fafc;
+}
+
+.contact-intro-card .w-24 {
+  background-color: #279e0a;
+}
+
+.contact-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.contact-header h2 {
+  font-size: 2.25rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.contact-header .highlight {
+  color: #279e0a;
+}
+
+.underline {
+  width: 4rem;
+  height: 0.25rem;
+  background-color: #279e0a;
+  margin: 0 auto 1rem;
+}
+
+.contact-header p {
+  color: #555;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.contact-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.contact-form-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #ffffff;
+  padding: 2rem 2.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+
+.contact-info-box {
+  background-color: #f3fbf0;
+  color: #374151;
+  padding: 2rem 2.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+.contact-form-box h3,
+.contact-info-box h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.contact-form-box form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.contact-form-box input,
+.contact-form-box textarea {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1.25rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  transition: border 0.3s ease;
+}
+
+.contact-form-box input:focus,
+.contact-form-box textarea:focus {
+  border-color: #279e0a;
+  outline: none;
+}
+
+.submit-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  background-color: #279e0a;
+  font-size: 0.95rem;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+
+.submit-btn:hover {
+  background-color: #1e7408;
+}
+
+.icon {
+  margin-right: 0.5rem;
+}
+
+.info-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.contact-info-box .icon-box {
+  background-color: #279e0a;
+  color: #ffffff;
+  padding: 0.75rem;
+  border-radius: 9999px;
+  margin-right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.contact-info-box h4 {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.contact-info-box h3,
+.contact-info-box h4 {
+  color: #279e0a;
+}
+
+.contact-info-box p {
+  color: #374151;
+  font-size: 0.95rem;
+}
+
+.social-section {
+  margin-top: 2rem;
+}
+
+.social-icons {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-icon {
+  width: 40px;
+  height: 40px;
+  background-color: #e7f5e4;
+  color: #279e0a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.contact-info-box .social-icon {
+  background-color: #e7f5e4;
+  color: #279e0a;
+}
+
+.contact-info-box .social-icon:hover {
+  background-color: #279e0a;
+  color: #ffffff;
+}
+
+.icon-mask {
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+}
+
+/* Example placeholder icons — replace with real masks or SVGs as needed */
+.facebook { mask-image: url('/icons/facebook.svg'); }
+.twitter { mask-image: url('/icons/twitter.svg'); }
+.instagram { mask-image: url('/icons/instagram.svg'); }
+.linkedin { mask-image: url('/icons/linkedin.svg'); }
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .contact-content {
+    flex-direction: column;
+  }
+
+  .contact-form-box,
+  .contact-info-box {
+    flex: 1 1 100%;
+  }
+
+  .contact-header h2 {
+    font-size: 1.75rem;
+  }
+
+  .contact-header p {
+    font-size: 0.95rem;
+  }
+}

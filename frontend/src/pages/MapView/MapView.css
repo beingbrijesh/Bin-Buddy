@@ -1,0 +1,48 @@
+.map-view-page {
+  padding: 2rem;
+  height: 100%;
+  min-height: calc(100vh - 80px);
+  background-color: #f8f9fa;
+}
+
+.map-view-header {
+  margin-bottom: 2rem;
+}
+
+.map-view-header h1 {
+  color: #2c3e50;
+  margin: 0;
+  font-size: 2rem;
+}
+
+.map-view-header p {
+  color: #6b7280;
+  margin: 0.5rem 0 0;
+  font-size: 1.1rem;
+}
+
+.map-view-container {
+  height: calc(100vh - 200px);
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .map-view-page {
+    padding: 1rem;
+  }
+
+  .map-view-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .map-view-header p {
+    font-size: 1rem;
+  }
+
+  .map-view-container {
+    height: calc(100vh - 160px);
+  }
+} 

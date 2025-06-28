@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Browser API polyfill for extension compatibility - must be first -->
+    <script>
+      // Comprehensive polyfill for browser extension APIs
+      if (typeof browser === 'undefined') {
+        window.browser = window.chrome || {};
+        
+        // Add common browser extension API methods
+        if (!window.browser.runtime) {
+          window.browser.runtime = {
+            sendMessage: function() { return Promise.resolve(); },
+            onMessage: { addListener: function() {} }
+          };
+        }
+        
+        if (!window.browser.storage) {
+          window.browser.storage = {
+            local: {
+              get: function() { return Promise.resolve({}); },
+              set: function() { return Promise.resolve(); }
+            }
+          };
+        }
+      }
+    </script>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.webp" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BinBuddy | Your Waste. Our Mission</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

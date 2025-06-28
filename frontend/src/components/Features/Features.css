@@ -1,0 +1,177 @@
+.features-section {
+  padding: 5rem 0;
+  background-color: white;
+}
+
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.section-header h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.highlight {
+  color: #279e0a;
+}
+
+.underline {
+  width: 6rem;
+  height: 0.25rem;
+  background-color: #279e0a;
+  margin: 0 auto 1.5rem;
+}
+
+.section-header p {
+  max-width: 600px;
+  margin: 0 auto;
+  color: #4B5563;
+}
+
+/* .features-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  margin-top: 2rem;
+} */
+
+.features-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  max-width: 100%;
+  margin-top: 2rem;
+}
+
+
+
+.feature-card {
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.feature-card:hover {
+  background-color: #f3f4f6;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.icon-style {
+  color: #279e0a;
+}
+
+.icon-container {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.feature-card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.feature-card p {
+  color: #4B5563;
+}
+
+.how-it-works {
+  margin-top: 4rem;
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  gap: 2rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+@media(min-width: 768px) {
+  .how-it-works {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .how-image {
+    padding-left: 2rem;
+  }
+}
+
+.how-content h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.how-content ul {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 1.5rem;
+}
+
+.how-content li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.step-number {
+  background-color: #279e0a;
+  color: white;
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  text-align: center;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  font-weight: 600;
+}
+
+.learn-more-btn {
+  background-color: #279e0a;
+  color: white;
+  padding: 0.5rem 1.5rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.learn-more-btn:hover {
+  background-color: #1e7408;
+}
+
+/* .how-image img {
+  width: 100%;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+} */
+
+.how-image {
+  width: 100%;
+  max-width: 600px;        /* Adjust as needed based on layout */
+  margin: 0 auto;          /* Center it */
+}
+
+.how-image img {
+  width: 100%;
+  height: auto;
+  max-height: 600px;       /* Optional: limit vertical space */
+  object-fit: contain;     /* Keeps full image without cropping */
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  display: block;
+}
+
+
+
