@@ -1,0 +1,161 @@
+.admin-task-verification {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.task-header {
+  margin-bottom: 2rem;
+}
+
+.task-header h2 {
+  margin: 0 0 1rem 0;
+  color: #2c3e50;
+}
+
+.task-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.meta-item .label {
+  color: #6c757d;
+  font-weight: 500;
+}
+
+.meta-item .value {
+  color: #2c3e50;
+}
+
+.status-text {
+  text-transform: capitalize;
+}
+
+.task-images {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.image-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.image-container h3 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 1.1rem;
+}
+
+.image-container img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.timestamp {
+  color: #6c757d;
+  font-size: 0.875rem;
+}
+
+.worker-notes {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.worker-notes h3 {
+  margin: 0 0 0.5rem 0;
+  color: #2c3e50;
+  font-size: 1.1rem;
+}
+
+.worker-notes p {
+  margin: 0;
+  color: #4b5563;
+  line-height: 1.5;
+}
+
+.verification-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.verification-notes {
+  width: 100%;
+  min-height: 100px;
+  padding: 1rem;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  resize: vertical;
+}
+
+.error-message {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: #fee2e2;
+  color: #dc2626;
+  border-radius: 8px;
+}
+
+.verification-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.approve-btn,
+.reject-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.approve-btn {
+  background: #4CAF50;
+  color: white;
+}
+
+.approve-btn:hover {
+  background: #43a047;
+}
+
+.reject-btn {
+  background: #dc2626;
+  color: white;
+}
+
+.reject-btn:hover {
+  background: #b91c1c;
+}
+
+.approve-btn:disabled,
+.reject-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+} 

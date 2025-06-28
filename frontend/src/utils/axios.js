@@ -1,0 +1,234 @@
+import axios from 'axios';
+import { STORAGE_KEYS } from '../constants';
+
+const DEBUG = true;
+
+const debugLog = (...args) => {
+  if (DEBUG) {
+    console.log('[Axios Debug]', ...args);
+  }
+};
+
+// Try to read API URL from environment or use fallback
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+console.log('🌐 API Base URL:', API_URL);
+
+const api = axios.create({
+  baseURL: API_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  withCredentials: false, // Change to false for CORS testing
+  timeout: 15000, // Increased timeout for slower connections
+});
+
+// Request interceptor
+api.interceptors.request.use(
+  (config) => {
+    // Get token from localStorage
+    const token = localStorage.getItem(STORAGE_KEYS.AUTH_TOKEN);
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+      debugLog('Added Authorization header:', `Bearer ${token.substring(0, 10)}...`);
+    } else {
+      debugLog('WARNING: No token found for request');
+    }
+    
+    // Fix double 'api' in URLs
+    if (config.url && config.url.startsWith('/api/')) {
+      config.url = config.url.replace('/api/', '/');
+      debugLog('Fixed double API prefix in URL:', config.url);
+    }
+    
+    // Special debug for worker update endpoints
+    if (config.url?.includes('/update-worker') || config.url?.includes('/create-worker')) {
+      console.log('🔍 Worker API Request:', {
+        url: config.url,
+        method: config.method,
+        data: config.data ? JSON.parse(JSON.stringify(config.data)) : null
+      });
+    }
+    
+    // Log detailed request information
+    debugLog('Request Details:', {
+      url: config.url,
+      fullUrl: `${API_URL}${config.url}`,
+      method: config.method,
+      headers: config.headers,
+      hasToken: !!token,
+      tokenFirstChars: token ? token.substring(0, 10) + '...' : 'none',
+      data: config.data ? JSON.parse(JSON.stringify(config.data)) : null,
+      params: config.params
+    });
+
+    // Validate request payload for POST/PUT/PATCH
+    if (['post', 'put', 'patch'].includes(config.method?.toLowerCase())) {
+      if (config.data && typeof config.data === 'object') {
+        debugLog('Request Payload Validation:', {
+          hasData: !!config.data,
+          dataType: typeof config.data,
+          keys: Object.keys(config.data),
+          qrCodeURL: config.data.qrCodeURL
+        });
+      }
+    }
+
+    // Log outgoing requests in development
+    if (process.env.NODE_ENV === 'development') {
+      console.log('🚀 API Request:', {
+        method: config.method?.toUpperCase(),
+        url: config.url,
+        data: config.data,
+        headers: config.headers
+      });
+    }
+
+    return config;
+  },
+  (error) => {
+    console.error('❌ Request Error:', error);
+    return Promise.reject(error);
+  }
+);
+
+// Response interceptor
+api.interceptors.response.use(
+  (response) => {
+    // Special debug for worker update endpoints
+    if (response.config.url?.includes('/update-worker') || response.config.url?.includes('/create-worker')) {
+      console.log('✅ Worker API Response:', {
+        url: response.config.url,
+        status: response.status,
+        data: response.data
+      });
+    }
+    
+    // Log successful responses in development
+    if (process.env.NODE_ENV === 'development') {
+      console.log('✅ API Response:', {
+        status: response.status,
+        data: response.data
+      });
+    }
+    
+    debugLog('Response Details:', {
+      url: response.config.url,
+      method: response.config.method,
+      status: response.status,
+      statusText: response.statusText,
+      hasData: !!response.data,
+      dataKeys: response.data ? Object.keys(response.data) : [],
+      headers: response.headers,
+      requestHeaders: response.config.headers,
+      requestData: response.config.data ? JSON.parse(JSON.stringify(response.config.data || {})) : null
+    });
+    return response;
+  },
+  (error) => {
+    // Enhanced error logging
+    const fullUrl = error.config?.baseURL + error.config?.url;
+    
+    console.error('❌ API Error:', error.response?.data || error);
+    
+    if (process.env.NODE_ENV === 'development') {
+      console.log('[Axios Debug] Response error:', {
+        config: error.config,
+        response: error.response?.data,
+        status: error.response?.status
+      });
+      
+      // Log server error details if available
+      if (error.response?.status === 500) {
+        console.log('🔥 Server Error Details:', {
+          endpoint: error.config?.url,
+          fullUrl,
+          requestData: error.config?.data,
+          responseError: error.response?.data?.error || 'No specific error message',
+          responseMessage: error.response?.data?.message,
+          stack: error.response?.data?.stack
+        });
+      }
+    }
+    
+    // Check for 404 errors specifically for debugging
+    if (error.response?.status === 404) {
+      console.error('🔍 404 Not Found Error:', { 
+        url: error.config?.url,
+        fullUrl,
+        suggestedFix: 'Make sure your backend server is running and the endpoint exists.',
+        testCommand: `curl -v ${fullUrl}`
+      });
+      
+      // Output suggested API endpoint
+      console.info('💡 Did you mean one of these endpoints?');
+      const suggestedEndpoints = [
+        '/users', 
+        '/users/all-workers', 
+        '/test/workers'
+      ];
+      
+      suggestedEndpoints.forEach(endpoint => {
+        console.info(`- ${API_URL}${endpoint}`);
+      });
+    }
+
+    // Handle token expiration
+    if (error.response?.status === 401) {
+      debugLog('Unauthorized - clearing auth state');
+      localStorage.removeItem(STORAGE_KEYS.AUTH_TOKEN);
+      localStorage.removeItem(STORAGE_KEYS.USER_DATA);
+      window.location.href = '/signin';
+    }
+
+    return Promise.reject(error);
+  }
+);
+
+// Add a direct test method for debugging
+api.testEndpoint = async (endpoint) => {
+  try {
+    console.log(`🔍 Testing endpoint: ${API_URL}${endpoint}`);
+    const response = await axios.get(`${API_URL}${endpoint}`);
+    console.log('✅ Test successful:', response.status, response.data);
+    return { success: true, data: response.data };
+  } catch (error) {
+    console.error('❌ Test failed:', error.message);
+    return { success: false, error: error.message };
+  }
+};
+
+// Add a method to check the server status
+api.checkServer = async () => {
+  try {
+    console.log('🔍 Checking server status...');
+    const response = await axios.get(`${API_URL.split('/api')[0]}/health`);
+    console.log('✅ Server is running:', response.status, response.data);
+    return { online: true, data: response.data };
+  } catch (error) {
+    console.error('❌ Server may be offline:', error.message);
+    return { online: false, error: error.message };
+  }
+};
+
+// Add utility to fix worker passwords (only for development)
+api.fixWorkerPasswords = async () => {
+  try {
+    console.log('🔧 Attempting to fix worker passwords...');
+    const response = await api.post('/api/workers/fix-passwords');
+    console.log('✅ Password fix complete:', response.data);
+    return {
+      success: true,
+      message: response.data.message,
+      workers: response.data.workers
+    };
+  } catch (error) {
+    console.error('❌ Error fixing worker passwords:', error);
+    return {
+      success: false,
+      message: error.response?.data?.message || error.message,
+      error
+    };
+  }
+};
+
+export default api; 

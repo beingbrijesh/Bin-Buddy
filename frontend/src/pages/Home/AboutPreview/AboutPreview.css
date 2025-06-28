@@ -1,0 +1,162 @@
+/* src/pages/Home/AboutPreview/AboutPreview.css */
+
+.about-preview {
+  width: 100%;
+  padding: 5rem 1rem;
+  background-color: #f9fafb;
+}
+
+.container {
+  max-width: 100%;
+  margin: auto;
+  padding: 0 1rem;
+}
+
+.heading {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.highlight {
+  color: #279e0a;
+}
+
+.underline {
+  width: 96px;
+  height: 4px;
+  background-color: #279e0a;
+  margin: 0 auto 1.5rem;
+}
+
+.description {
+  max-width: 600px;
+  margin: auto;
+  color: #4b5563;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.feature-box {
+  background: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.feature-box:hover {
+  transform: translateY(-6px);
+}
+
+.icon-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.icon {
+  color: #279e0a;
+}
+
+.feature-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.feature-description {
+  color: #6b7280;
+}
+
+.know-more-btn {
+  background-color: #279e0a;
+  color: white;
+  padding: 1rem 2.5rem;
+  border-radius: 999px;
+  font-weight: 500;
+  font-size: 1.1rem;
+  transition: background-color 0.3s;
+  border: none;
+  cursor: pointer;
+  margin-top: 2rem;
+}
+
+.know-more-btn:hover {
+  background-color: #207e08;
+}
+
+/* ✅ Mission Section */
+
+.mission-block {
+  margin-top: 2rem;
+  background-color: #279e0a;
+  color: white;
+  border-radius: 1rem;
+  padding: 2.5rem 1rem;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.mission-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+@media (min-width: 768px) {
+  .mission-content {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+  }
+}
+
+.mission-text {
+  flex: 3;
+  padding-right: 2.5rem;
+}
+
+
+.mission-text h3 {
+  font-size: 1.75rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.mission-text p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.mission-stats {
+  flex: 2;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.stat {
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 1rem;
+  text-align: center;
+  border-radius: 0.75rem;
+}
+
+.stat-number {
+  font-size: 1.75rem;
+  font-weight: bold;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+}
